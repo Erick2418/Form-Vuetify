@@ -27,7 +27,13 @@ const personas_generadas = [
     sueldo: '1500',
   }
 ];
-
+const initial_data={
+  "firstname":"Novale",
+  "fecha": "12/12/12",
+  "correo": "Novale@gmail.com",
+  "telefono": "123456",
+  "sueldo": "122"
+}
 export default {
     namespaced:true,
       state: {
@@ -40,8 +46,9 @@ export default {
         },
         setPersonas(state,payload){
           state.personas=payload
-        }
-
+        },
+      
+      
       },
       actions: {
         getUserApi: async function ({commit}) {
@@ -67,26 +74,20 @@ export default {
              })
            }        
         },
-        postUserApi: async function () {
+        postUserApi: async function ({state}) {
+          // console.log();
           let apiUsuario;
-          const data={
-            "firstname":"Miranda",
-            "fecha": "12/12/12",
-            "correo": "Miranda@gmail.com",
-            "telefono": "123456",
-            "sueldo": "122"
-          }
           const header={
             'x-token': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjEiLCJlbWFpbCI6IklzYWJlbEBnbWFpbC5jb20iLCJpYXQiOjE2Mjg3ODA1ODEsImV4cCI6MTYyODc4Nzc4MX0.tIZZNsVwE4_2HaHdUUnZ-tRbaQZolmTQFoksGhUQz6c'
           }
           try {
-             apiUsuario = await axios.post('http://localhost:3000/api/user',data,
+             apiUsuario = await axios.post('http://localhost:3000/api/user',state.persona,
              {headers:header}
-             
-             ).then(({data}) => {
-              console.log(data.users);
-              // commit('setPersonas',data.users);
-            });
+             )
+            //  .then(({data}) => {
+            //   console.log(data.users);
+            //   // commit('setPersonas',data.users);
+            // });
             //  this.usersApi=apiUsuario.data.users;
            }catch (err) {
              apiUsuario = err.response;
@@ -94,7 +95,7 @@ export default {
              Swal.fire({
                icon: 'error',
                title: 'Oops...',
-               text: apiUsuario.data.msg + ", inicie sesion e intente nuevamente",
+               text:  ", intente nuevamente",
 
              })
            }        

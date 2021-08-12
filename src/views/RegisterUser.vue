@@ -9,7 +9,7 @@
             v-model="firstname"
             :counter="10"
             :rules="firstnameRules"
-            label="Nombre"
+            label="firstname"
             required
             ></v-text-field>
 
@@ -116,13 +116,14 @@ export default {
     //   this.getUser();
     // },
     created(){
-       this.postUserApi();
+      //  this.postUserApi();
     },
     computed:{
    
       ...mapState('usuario',['fecha_state']),
     },
     methods: {
+       ...mapActions('usuario',['setPersona']),
        ...mapMutations('usuario',['establecerFecha']),
       ...mapActions('usuario',['postUserApi']),
       validate () {
@@ -135,10 +136,12 @@ export default {
       submit () {
           const usuarioNew= user(this.firstname,this.correo,this.fecha_state,this.sueldo,this.telefono);
           console.log( usuarioNew);
+          // this.postUserApi();
       },
     },
      components: {
       InputDate,
+      ...mapState('usuario',['personas']),
     },
     
 }
