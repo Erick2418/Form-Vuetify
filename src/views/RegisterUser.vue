@@ -80,7 +80,7 @@
 </template>
 
 <script>
-import { mapMutations, mapState } from 'vuex';
+import { mapActions, mapMutations, mapState } from 'vuex';
 import InputDate from './../components/InputDate.vue';
 import {user} from './../models/user.model'
 
@@ -116,16 +116,15 @@ export default {
     //   this.getUser();
     // },
     created(){
-       
+       this.postUserApi();
     },
     computed:{
    
       ...mapState('usuario',['fecha_state']),
     },
     methods: {
-    
        ...mapMutations('usuario',['establecerFecha']),
-
+      ...mapActions('usuario',['postUserApi']),
       validate () {
         this.$refs.form.validate()
       },

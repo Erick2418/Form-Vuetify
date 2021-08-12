@@ -49,7 +49,7 @@ export default {
           try {
              apiUsuario = await axios.get('http://localhost:3000/api/user',{
                headers: {
-                 'x-token': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjEiLCJlbWFpbCI6IklzYWJlbEBnbWFpbC5jb20iLCJpYXQiOjE2Mjg3NDA0MjYsImV4cCI6MTYyODc0NzYyNn0.slC83eWvBjHKVE2t3fn6ICIBjBTGA1x3Hwmlg3Z_9UU'
+                 'x-token': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjEiLCJlbWFpbCI6IklzYWJlbEBnbWFpbC5jb20iLCJpYXQiOjE2Mjg3ODA1ODEsImV4cCI6MTYyODc4Nzc4MX0.tIZZNsVwE4_2HaHdUUnZ-tRbaQZolmTQFoksGhUQz6c'
                }
             }).then(({data}) => {
               console.log(data.users);
@@ -67,6 +67,40 @@ export default {
              })
            }        
         },
+        postUserApi: async function () {
+          let apiUsuario;
+          const data={
+            "firstname":"Miranda",
+            "fecha": "12/12/12",
+            "correo": "Miranda@gmail.com",
+            "telefono": "123456",
+            "sueldo": "122"
+          }
+          const header={
+            'x-token': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjEiLCJlbWFpbCI6IklzYWJlbEBnbWFpbC5jb20iLCJpYXQiOjE2Mjg3ODA1ODEsImV4cCI6MTYyODc4Nzc4MX0.tIZZNsVwE4_2HaHdUUnZ-tRbaQZolmTQFoksGhUQz6c'
+          }
+          try {
+             apiUsuario = await axios.post('http://localhost:3000/api/user',data,
+             {headers:header}
+             
+             ).then(({data}) => {
+              console.log(data.users);
+              // commit('setPersonas',data.users);
+            });
+            //  this.usersApi=apiUsuario.data.users;
+           }catch (err) {
+             apiUsuario = err.response;
+           
+             Swal.fire({
+               icon: 'error',
+               title: 'Oops...',
+               text: apiUsuario.data.msg + ", inicie sesion e intente nuevamente",
+
+             })
+           }        
+        },
+
+
       },
       modules: {
     
