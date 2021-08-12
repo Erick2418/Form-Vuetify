@@ -49,11 +49,11 @@ export default {
           try {
              apiUsuario = await axios.get('http://localhost:3000/api/user',{
                headers: {
-                 'x-token': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjEiLCJlbWFpbCI6IklzYWJlbEBnbWFpbC5jb20iLCJpYXQiOjE2Mjg3MjI1OTQsImV4cCI6MTYyODcyOTc5NH0.JZJtNaoFWdTf6g0dAMyxDOZJcsJ_N4Y48QCGBwbZNpU'
+                 'x-token': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjEiLCJlbWFpbCI6IklzYWJlbEBnbWFpbC5jb20iLCJpYXQiOjE2Mjg3NDA0MjYsImV4cCI6MTYyODc0NzYyNn0.slC83eWvBjHKVE2t3fn6ICIBjBTGA1x3Hwmlg3Z_9UU'
                }
             }).then(({data}) => {
-              console.log(data);
-              commit('setPersonas',data);
+              console.log(data.users);
+              commit('setPersonas',data.users);
             });
             //  this.usersApi=apiUsuario.data.users;
            }catch (err) {

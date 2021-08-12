@@ -14,15 +14,10 @@
     </v-card-title>
     <v-data-table
       :headers="headers"
-      :items="desserts"
+      :items="items"
       :search="search"
     ></v-data-table>
   </v-card>
-  
-  <div>
-    <button @click="setUserTable" >PUSH ME</button>
-    {{personas}}
-  </div>
 </div>
 </template>
 
@@ -34,18 +29,28 @@ export default {
       return {
         search: '',
         usuario_modelo: [{ id: 1,name: 'Mishell', email: 'Mishell@gmail.com', sueldo: '1500' } ],
-        headers: [
-          { text: 'Nombre', align: 'start', sortable: false, value: 'id' },
-          { text: 'Nombre', align: 'start', sortable: false, value: 'name' },
-          { text: 'Email',align: 'start', sortable: false, value: 'email' },
-          { text: 'Sueldo',align: 'start', sortable: false, value: 'sueldo' },
+        headers: [//columnas
+          { text: 'id', align: 'start', sortable: false, value: 'id' },
+          { text: 'firstname', align: 'start', sortable: false, value: 'firstname' },
+          { text: 'fecha',align: 'start', sortable: false, value: 'fecha' },
+          { text: 'correo',align: 'start', sortable: false, value: 'correo' },
+          { text: 'telefono',align: 'start', sortable: false, value: 'telefono' },
+          { text: 'sueldo',align: 'start', sortable: false, value: 'sueldo' },
         ],
-        desserts:[],// lo agrego desde el mounted, con el metodo setusertable
+        items:[],// lo agrego desde el mounted, con el metodo setusertable
       }
     },
+    created(){
+        this.setUserTable();
+        // this.items=this.personas;
+    },
+    mounted:{
+      
+    },
     methods:{
-        setUserTable(){
-          this.getUserApi();
+        async setUserTable(){
+          await this.getUserApi();
+          this.items=this.personas;
         },
        ...mapActions('usuario',['getUserApi']),
     },
